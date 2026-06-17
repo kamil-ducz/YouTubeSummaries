@@ -1,4 +1,8 @@
-﻿Console.WriteLine("Let's see how YouTubeExplode serves to get transcription from videos");
+﻿using System;
+using System.Linq;
+using YoutubeExplode;
+
+Console.WriteLine("Let's see how YouTubeExplode serves to get transcription from videos");
 Console.WriteLine("Please type YT video URL: ");
 string? videoUrl = Console.ReadLine();
 
@@ -12,9 +16,7 @@ var captionTrack = await ytclient.Videos.ClosedCaptions.GetAsync(trackInfo);
 Console.WriteLine("Transcript language: " + trackInfo.Language.Name);
 
 Console.WriteLine("Transcription content: ");
-foreach(var caption in captionTrack.Captions)
+foreach (var caption in captionTrack.Captions)
 {
     Console.WriteLine(caption);
 }
-
-
