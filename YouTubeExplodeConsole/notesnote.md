@@ -1,0 +1,10 @@
+- guy's testing Flex Seal on a bucket — but going way harder than usual (knife + chainsaw lol)
+- basically demolishes the bucket, water sprays out everywhere, obvs leaks
+- starts spraying Flex Seal on it, talks about doing thin even coats, letting it dry between layers
+- narrator chimes in: if it still leaks, just add more coats
+- guy says yeah there are still gaps but Flex Seal will fill them, don't sweat it
+- walks through the damage spots — knife hole, chainsaw gash, whole thing coated
+- fills everything, lets it dry, does multiple coats
+- moment of truth: fills it with water, no leaks at all 🎉
+- calls the cameraman over to look, hyped about it
+- bottom line: works great IF you fill all the cracks and let it fully dry
