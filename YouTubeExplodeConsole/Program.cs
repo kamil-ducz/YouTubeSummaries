@@ -13,20 +13,28 @@ string? videoUrl = Console.ReadLine();
 YoutubeClient ytclient = new YoutubeClient();
 
 var trackManifest = await ytclient.Videos.ClosedCaptions.GetManifestAsync(videoUrl ?? "");
-var trackInfo = trackManifest.TryGetByLanguage("en") ?? trackManifest.Tracks.FirstOrDefault();
+var track = await ytclient.Videos.GetAsync(videoUrl ?? "");
+var trackTitle = track.Title;
 
-var captionTrack = await ytclient.Videos.ClosedCaptions.GetAsync(trackInfo);
+var trackInfo = trackManifest.TryGetByLanguage("en") ?? trackManifest.Tracks.FirstOrDefault();
+if(trackInfo is null)
+{
+    Console.WriteLine("There are no captions for this video.");
+    Console.ReadLine();
+    throw new Exception();
+}
+var trackCaption = await ytclient.Videos.ClosedCaptions.GetAsync(trackInfo);
 
 Console.WriteLine("Transcript language: " + trackInfo.Language.Name);
 
 Console.WriteLine("Transcription content: ");
-foreach (var caption in captionTrack.Captions)
+foreach (var caption in trackCaption.Captions)
 {
     Console.WriteLine(caption);
 }
 
 var manifestJson = JsonConvert.SerializeObject(trackManifest);
-var captionJson = JsonConvert.SerializeObject(captionTrack);
+var captionJson = JsonConvert.SerializeObject(trackCaption);
 
 var httpClient = new HttpClient();
 httpClient.BaseAddress = new Uri("http://localhost:11434");
@@ -48,4 +56,4 @@ if (!string.IsNullOrEmpty(path))
 {
     Directory.CreateDirectory(path);
 }
-File.WriteAllText(Path.Combine(path, "note.md"), result?.Response);
+File.WriteAllText(Path.Combine(path, trackTitle + ".md"), result?.Response);
