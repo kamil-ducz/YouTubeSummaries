@@ -12,6 +12,7 @@ string? videoUrl = Console.ReadLine();
 
 YoutubeClient ytclient = new YoutubeClient();
 
+// TODO handle exception, when given URL is invalid or doesn't exist
 var trackManifest = await ytclient.Videos.ClosedCaptions.GetManifestAsync(videoUrl ?? "");
 var track = await ytclient.Videos.GetAsync(videoUrl ?? "");
 var trackTitle = track.Title;
@@ -37,6 +38,7 @@ var manifestJson = JsonConvert.SerializeObject(trackManifest);
 var captionJson = JsonConvert.SerializeObject(trackCaption);
 
 var httpClient = new HttpClient();
+// TODO extract address somewhere to not harcode it here
 httpClient.BaseAddress = new Uri("http://localhost:11434");
 
 var request = new
@@ -45,7 +47,7 @@ var request = new
     prompt = "Short casual notes from this transcript:\n\n" + captionJson,
     stream = false
 };
-
+// TODO handle exception, when there is no local Ollama at 11434
 var response = await httpClient.PostAsJsonAsync("api/generate", request);
 var result = await response.Content.ReadFromJsonAsync<OllamaResponse>();
 Console.WriteLine(result?.Response);
