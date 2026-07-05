@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
 using YoutubeExplode;
+using YouTubeExplodeConsole.Config;
 
 Console.WriteLine("Let's see how YouTubeExplode serves to get transcription from videos");
 Console.WriteLine("Please type YT video URL: ");
@@ -70,7 +71,7 @@ var manifestNotesRequest = new GroqRequest
     Temperature = 0.3
 };
 
-var manifestNotesResponse = await httpClient.PostAsJsonAsync("https://api.groq.com/openai/v1/chat/completions", manifestNotesRequest);
+var manifestNotesResponse = await httpClient.PostAsJsonAsync(Paths.ChatCompletions, manifestNotesRequest);
 if (!manifestNotesResponse.IsSuccessStatusCode)
 {
     var error = await manifestNotesResponse.Content.ReadAsStringAsync();
