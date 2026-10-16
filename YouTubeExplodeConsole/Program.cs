@@ -54,7 +54,7 @@ string plainTextTranscript = string.Join(" ", trackCaption.Captions.Select(c => 
 
 var manifestNotesRequest = new GroqRequest
 {
-    Model = "llama-3.3-70b-versatile",
+    Model = "openai/gpt-oss-120b",
     Messages = new List<MessageObject>
         {
             new MessageObject
