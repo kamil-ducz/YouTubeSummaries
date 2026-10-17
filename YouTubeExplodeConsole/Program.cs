@@ -43,11 +43,9 @@ foreach (var caption in trackCaption.Captions)
 }
 
 var httpClient = new HttpClient();
-// IMPORTANT 
-// Groq API key is needed below after "Bearer" on the right
-// I have it in Visual Studio 18 folder, you should have your own secret
+
 httpClient.DefaultRequestHeaders.Authorization =
-    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", "");
+    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Keys.GroqAPISecret);
 httpClient.DefaultRequestHeaders.Add("User-Agent", "YouTubeExplodeConsoleApp/1.0");
 
 string plainTextTranscript = string.Join(" ", trackCaption.Captions.Select(c => c.Text));
