@@ -60,7 +60,7 @@ var manifestNotesRequest = new GroqRequest
             new MessageObject
             {
                 Role = "system",
-                Content = "Make casual notes from the YouTube transcription, try to keep them short"
+                Content = "Make casual notes from the YouTube transcription, try to keep them short, use language in which transcription was downloaded"
             },
             new MessageObject
             {
