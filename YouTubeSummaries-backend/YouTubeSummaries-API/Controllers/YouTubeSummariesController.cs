@@ -9,6 +9,12 @@ namespace YouTubeSummaries;
 public class YouTubeSummariesController : ControllerBase
 {
     private readonly YoutubeClient _ytClient = new YoutubeClient();
+    private readonly ISummaryService _summaryService;
+
+    public YouTubeSummariesController(ISummaryService summaryService)
+    {
+        _summaryService = summaryService;
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetTranscript([FromQuery] string videoUrl)
@@ -51,6 +57,31 @@ public class YouTubeSummariesController : ControllerBase
         catch (Exception ex)
         {
             return BadRequest($"There was an error in communication with YouTube {ex.Message}");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> MakeNotesFromCaptions([FromBody] GenerateNotesDto request)
+    {
+        if(string.IsNullOrWhiteSpace(request.Transcript))
+        {
+            return BadRequest("Transcription can't be empty");
+        }
+
+        try
+        {
+            var notes = await _summaryService.GenerateNotesAsync(
+                request.Transcript,
+                request.Language,
+                request.Length,
+                request.Style
+            );
+
+            return Ok(new { Notes = notes });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Error during generating notes: {ex.Message}");
         }
     }
 }
