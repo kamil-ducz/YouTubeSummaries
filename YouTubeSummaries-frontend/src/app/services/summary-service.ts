@@ -14,14 +14,12 @@ export class YouTubeService {
     constructor(private http: HttpClient) { }
 
     getTranscript(videoUrl: string): Observable<TranscriptResponse> {
-        return this.http.get<TranscriptResponse>(`${this.url}/transcript/`, {
+        return this.http.get<TranscriptResponse>(`${this.url}`, {
             params: { videoUrl: videoUrl }
         })
     }
 
      generateNotes(requestData: GenerateNotesRequest): Observable<{ notes: string }> {
-    return this.http.post<{ notes: string }>(`${this.url}/notes`, requestData);
-  }
-
-    
+    return this.http.post<{ notes: string }>(`${this.url}`, requestData);
+  }    
 }

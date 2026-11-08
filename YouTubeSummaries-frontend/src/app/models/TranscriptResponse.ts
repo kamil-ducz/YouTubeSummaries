@@ -1,9 +1,9 @@
-export interface CaptionLine {
+export type CaptionLine = {
   text: string;
   startInSeconds: number;
 }
 
-export interface TranscriptResponse {
+export type TranscriptResponse = {
   title: string;
   language: string;
   captions: CaptionLine[];
