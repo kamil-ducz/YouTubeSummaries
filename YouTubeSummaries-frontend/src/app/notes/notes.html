@@ -6,11 +6,12 @@
       </h3>
       <button (click)="downloadNotesFile()" 
               class="px-4 py-1.5 bg-amber-600 text-white text-sm font-medium rounded-md hover:bg-amber-700 transition flex items-center gap-1 cursor-pointer">
-        Download file
+        Download notes as PDF
       </button>
     </div>
     
-    <div [innerHTML]="data"
+    <div #notesContainer
+    [innerHTML]="data"
     class="prose max-w-none bg-white p-6 rounded-lg border border-amber-100 min-h-[200px] text-slate-700 leading-relaxed whitespace-pre-wrap">
       
     </div>
