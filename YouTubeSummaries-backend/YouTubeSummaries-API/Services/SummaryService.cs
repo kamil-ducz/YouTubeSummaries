@@ -20,7 +20,9 @@ internal class SummaryService : ISummaryService
         string systemInstruction = $"Make notes from YouTube transcription" +
                                    $"Use language: {language}" +
                                    $"Lenght of notes: {length}" +
-                                   $"Use style: {style}";
+                                   $"Use style: {style}" +
+                                   $"IMPORTANT: Format the entire output as clean semantic HTML using only tags like <h3>, <p>, <ul>, <li>, and <strong>. " +
+                                   $"Do NOT use Markdown syntax (no **, no ###, no tables with |). Do NOT wrap response in ```html code blocks.";
 
         _httpClient.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Keys.GroqAPISecret);

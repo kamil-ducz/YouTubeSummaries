@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   imports: [],
@@ -6,4 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './notes.css',
   templateUrl: './notes.html',
 })
-export class Notes {}
+export class Notes {
+    @Input() data!: string;
+
+downloadNotesFile() {
+throw new Error('Method not implemented.');
+}
+
+}

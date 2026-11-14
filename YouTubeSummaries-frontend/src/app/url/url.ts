@@ -3,9 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { YouTubeService } from '../services/summary-service';
 import { TranscriptResponse } from '../models/TranscriptResponse';
 import { Captions } from '../captions/captions';
+import { GenerateNotesRequest } from '../models/GenerateNotesRequest';
+import { Notes } from '../notes/notes';
 
 @Component({
-  imports: [FormsModule, Captions],
+  imports: [FormsModule, Captions, Notes],
   selector: 'app-url',
   styleUrl: './url.css',
   templateUrl: './url.html',
@@ -16,6 +18,8 @@ export class Url {
 
   videoUrl! : string;
   transcriptResponse! : TranscriptResponse | undefined;
+  requestData! : GenerateNotesRequest | undefined;
+  notesResponse! : string;
 
   onDownloadTranscript() : void {
     if (!this.videoUrl) {
@@ -29,15 +33,38 @@ export class Url {
       next: (response) => {
         this.transcriptResponse = response;
         this.cdr.detectChanges();
-        console.log('Success! Film title:', response.title);
-        console.log('Transcription lines count:', response.captions.length);
-        console.log('Full backend object:', response);
         
-        alert(`Connected with backend!\nFilm: ${response.title}`);
+        console.log(`Connected with backend!\nFilm: ${response.title}`);
       },
       error: (err) => {
         console.error('Did not connect with the backend:', err);
-        alert('Did not download the transcription. Check console (F12) and backend logs.');
+      }
+    });
+  }
+
+  onGenerateNotes() : void {
+    if (!this.transcriptResponse) {
+      alert('Please download the transcript first.');
+      return;
+    }
+
+    const requestData = {
+      transcript: this.transcriptResponse.captions.map(caption => caption.text).join(' '),
+      language: 'en', // Default language
+      length: 'medium', // Default length
+      style: 'informative' // Default style
+    } as GenerateNotesRequest;
+
+    this.requestData = requestData;
+
+    this.youtubeService.generateNotes(requestData).subscribe({
+      next: (response) => {
+        this.notesResponse = response.notes;
+        this.cdr.detectChanges();
+        console.log('Notes generated successfully' + response);
+      },
+      error: (err) => {
+        console.error('Error generating notes:', err);
       }
     });
   }
