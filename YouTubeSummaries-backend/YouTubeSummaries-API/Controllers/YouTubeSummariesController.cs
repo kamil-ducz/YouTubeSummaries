@@ -40,7 +40,9 @@ public class YouTubeSummariesController : ControllerBase
 
             var trackCaption = await _ytClient.Videos.ClosedCaptions.GetAsync(trackInfo);
 
-            var captionsList = trackCaption.Captions.Select(c => new
+            var captionsList = trackCaption.Captions
+                .Where(c => !string.IsNullOrWhiteSpace(c.Text))
+                .Select(c => new
             {
                 Text = c.Text,
                 StartInSeconds = c.Offset.TotalSeconds

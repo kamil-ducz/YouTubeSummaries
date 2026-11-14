@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TranscriptResponse } from '../models/TranscriptResponse';
 
 @Component({
   imports: [],
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './captions.css',
   templateUrl: './captions.html',
 })
-export class Captions {}
+export class Captions {
+
+  @Input() data: TranscriptResponse | undefined;
+}

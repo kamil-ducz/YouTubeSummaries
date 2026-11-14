@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { YouTubeService } from '../services/summary-service';
 import { TranscriptResponse } from '../models/TranscriptResponse';
+import { Captions } from '../captions/captions';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, Captions],
   selector: 'app-url',
   styleUrl: './url.css',
   templateUrl: './url.html',
 })
 export class Url {
 
-  constructor(private youtubeService: YouTubeService) {}
+  constructor(private youtubeService: YouTubeService, private cdr: ChangeDetectorRef) {}
 
   videoUrl! : string;
-  transcriptResponse! : TranscriptResponse;
+  transcriptResponse! : TranscriptResponse | undefined;
 
   onDownloadTranscript() : void {
     if (!this.videoUrl) {
@@ -27,10 +28,10 @@ export class Url {
     this.youtubeService.getTranscript(this.videoUrl).subscribe({
       next: (response) => {
         this.transcriptResponse = response;
+        this.cdr.detectChanges();
         console.log('Success! Film title:', response.title);
         console.log('Transcription lines count:', response.captions.length);
         console.log('Full backend object:', response);
-        console.log('transcriptResponse object:', this.transcriptResponse);
         
         alert(`Connected with backend!\nFilm: ${response.title}`);
       },
