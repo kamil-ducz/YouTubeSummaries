@@ -10,7 +10,9 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
     <div>
       <label class="block text-sm font-medium text-slate-600 mb-1">Notes language: </label>
-      <select class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500">
+      <select
+       [(ngModel)]="language"
+       class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500">
         <option value="auto">Movie default(auto)</option>
         <option value="pl">Polish</option>
         <option value="en">English</option>
@@ -18,14 +20,18 @@
     </div>
     <div>
       <label class="block text-sm font-medium text-slate-600 mb-1">Length: </label>
-      <select class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500">
+      <select
+       [(ngModel)]="lenght"
+       class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500">
         <option value="short">Short summary</option>
         <option value="long">Detailed notes</option>
       </select>
     </div>
     <div>
       <label class="block text-sm font-medium text-slate-600 mb-1">Style: </label>
-      <select class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500">
+      <select
+       [(ngModel)]="style"
+       class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500">
         <option value="simple">Simple (bullets)</option>
         <option value="structured">Structured (headings, sections)**
       </select>

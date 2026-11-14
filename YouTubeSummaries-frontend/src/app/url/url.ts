@@ -20,6 +20,9 @@ export class Url {
   transcriptResponse! : TranscriptResponse | undefined;
   requestData! : GenerateNotesRequest | undefined;
   notesResponse! : string;
+  language : string = 'auto';
+  lenght : string = 'short';
+  style : string = 'simple';
 
   onDownloadTranscript() : void {
     if (!this.videoUrl) {
@@ -50,9 +53,9 @@ export class Url {
 
     const requestData = {
       transcript: this.transcriptResponse.captions.map(caption => caption.text).join(' '),
-      language: 'en', // Default language
-      length: 'medium', // Default length
-      style: 'informative' // Default style
+      language: this.language,
+      length: this.lenght,
+      style: this.style
     } as GenerateNotesRequest;
 
     this.requestData = requestData;
