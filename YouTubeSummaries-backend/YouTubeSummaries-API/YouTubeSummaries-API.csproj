@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>YouTubeSummaries_API</RootNamespace>
+    <UserSecretsId>95f1fe9b-62c8-4adb-bb98-4ece835080f5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

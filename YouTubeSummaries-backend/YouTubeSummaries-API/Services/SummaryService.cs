@@ -9,10 +9,12 @@ public interface ISummaryService
 internal class SummaryService : ISummaryService
 {
     private readonly HttpClient _httpClient;
+    private readonly string _apiKey;
 
-    public SummaryService(HttpClient httpClient)
+    public SummaryService(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
+        _apiKey = configuration["Groq:ApiKey"] ?? throw new InvalidOperationException("Groq API key missing!");
     }
 
     public async Task<string> GenerateNotesAsync(string transcript, string language, string length, string style)
@@ -25,7 +27,7 @@ internal class SummaryService : ISummaryService
                                    $"Do NOT use Markdown syntax (no **, no ###, no tables with |). Do NOT wrap response in ```html code blocks.";
 
         _httpClient.DefaultRequestHeaders.Authorization =
-            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Keys.GroqAPISecret);
+            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _apiKey);
 
         var groqRequest = new GroqRequest
         {
