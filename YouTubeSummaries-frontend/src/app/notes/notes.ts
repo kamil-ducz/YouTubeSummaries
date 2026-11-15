@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import html2pdf from 'html2pdf.js';
+import { TranscriptResponse } from '../models/TranscriptResponse';
 
 @Component({
   imports: [],
@@ -8,12 +9,13 @@ import html2pdf from 'html2pdf.js';
   templateUrl: './notes.html',
 })
 export class Notes {
-    @Input() data!: string;
+    @Input() transcriptResponse!: TranscriptResponse | undefined;
+    @Input() notesResponse!: string;
 
     @ViewChild('notesContainer') notesContainer!: ElementRef;
 
     downloadNotesFile(): void {
-      if (!this.data || !this.notesContainer) return;
+      if (!this.notesResponse || !this.notesContainer) return;
 
       const element = this.notesContainer.nativeElement;
 
