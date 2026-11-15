@@ -8,6 +8,5 @@ import { TranscriptResponse } from '../models/TranscriptResponse';
   templateUrl: './captions.html',
 })
 export class Captions {
-
   @Input() data: TranscriptResponse | undefined;
 }

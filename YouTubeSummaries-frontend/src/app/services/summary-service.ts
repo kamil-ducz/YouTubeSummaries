@@ -19,7 +19,7 @@ export class YouTubeService {
         })
     }
 
-     generateNotes(requestData: GenerateNotesRequest): Observable<{ notes: string }> {
+    generateNotes(requestData: GenerateNotesRequest): Observable<{ notes: string }> {
     return this.http.post<{ notes: string }>(`${this.url}`, requestData);
   }    
 }
