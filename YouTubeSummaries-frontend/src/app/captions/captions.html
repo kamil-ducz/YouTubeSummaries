@@ -1,0 +1,18 @@
+@if (data) {
+  <div class="max-w-4xl mx-auto my-6 p-6 bg-slate-50 rounded-xl border border-slate-200">
+    <h2 class="text-xl font-bold text-slate-800 mb-2">
+      <h3>Movie title: </h3> {{ data?.title }}
+    </h2>
+
+    <p><strong>Fetched transcript:</strong></p>
+    <div class="transcript-box">
+      @for (caption of data?.captions; track caption.startInSeconds) {
+        <div class="caption-box">{{ caption.startInSeconds }}s {{ caption.text }}</div>
+      }
+      @if (data?.captions.length === 0) {
+        <p class="text-slate-400">No captions available for this video.</p>
+      }
+    </div>
+  </div>
+}
+

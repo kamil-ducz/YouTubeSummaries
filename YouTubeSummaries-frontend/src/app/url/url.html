@@ -1,0 +1,51 @@
+<div class="max-w-4xl mx-auto my-8 p-6 bg-white rounded-xl shadow-md border border-slate-100">
+  <div class="mb-6">
+    <label class="block text-sm font-semibold text-slate-700 mb-2">YouTube Video URL: </label>
+    <input type="text" [(ngModel)]="videoUrl" placeholder="https://youtube.com..."  
+             class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" />
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div>
+      <label class="block text-sm font-medium text-slate-600 mb-1">Notes language: </label>
+      <select
+       [(ngModel)]="language"
+       class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500">
+        <option value="auto">Movie default(auto)</option>
+        <option value="pl">Polish</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-slate-600 mb-1">Length: </label>
+      <select
+       [(ngModel)]="lenght"
+       class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500">
+        <option value="short">Short summary</option>
+        <option value="long">Detailed notes</option>
+      </select>
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-slate-600 mb-1">Style: </label>
+      <select
+       [(ngModel)]="style"
+       class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-red-500">
+        <option value="simple">Simple (bullets)</option>
+        <option value="structured">Structured (headings, sections)**
+      </select>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap gap-3 justify-end border-t pt-4">
+    <button (click)="onDownloadTranscript()"
+    class="px-5 py-2.5 bg-slate-800 text-white rounded-lg font-medium hover:bg-slate-700 transition">
+      Download transcription
+    </button>
+    <button (click)="onGenerateNotes()" 
+    class="px-5 py-2.5 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition shadow-sm">
+      Make Notes
+    </button>
+  </div>
+</div>
+<app-captions [data]="transcriptResponse"></app-captions>
+<app-notes [transcriptResponse]="transcriptResponse" [notesResponse]="notesResponse"></app-notes>
