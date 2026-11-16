@@ -9,7 +9,7 @@ import { TranscriptResponse } from "../models/TranscriptResponse";
 })
 
 export class YouTubeService {
-    private url = 'https://localhost:7214/api/YouTubeSummaries';
+    private url = 'youtubesummaries-backend-fbh5b6gva9hhbmap.westus3-01.azurewebsites.net/api/YouTubeSummaries';
 
     constructor(private http: HttpClient) { }
 
