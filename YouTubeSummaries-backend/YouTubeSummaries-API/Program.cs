@@ -9,6 +9,7 @@ builder.Services.AddCors();
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient<ISummaryService, SummaryService>();
+builder.Services.AddHttpClient<ITranscriptService, ExternalTranscriptService>();
 
 var app = builder.Build();
 
